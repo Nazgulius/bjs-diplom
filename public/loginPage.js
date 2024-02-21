@@ -2,23 +2,26 @@
 
 const userForm = new UserForm ();  
 
+// login
 userForm.loginFormCallback = data;
 
-
-ApiConnector.login(data => data, callback);
-
+ApiConnector.login(data, callback);
 
 
-if (){
+
+if (callback){
     location.reload();
 } else {
     setLoginErrorMessage(message);
 }
 
+// register
+userForm.registerFormCallback = data;
 
-userForm.registerFormCallback(data);
+ApiConnector.register(data, callback);
 
-if (ApiConnector.register) {
+
+if (callback) {
     location.reload();
 } else {
     setRegisterErrorMessage(message);
