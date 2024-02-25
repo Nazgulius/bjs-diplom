@@ -9,7 +9,7 @@ userForm.loginFormCallback = dataLogin => {
          if (callback.success){            
             location.reload();
          } else {
-            setLoginErrorMessage(message);
+            userForm.setLoginErrorMessage(callback.error);
          }
      });
 };
@@ -22,7 +22,7 @@ userForm.registerFormCallback = dataRegister => {
         if (callback.success) {           
             location.reload();
         } else {
-            setRegisterErrorMessage(message);
+            userForm.setRegisterErrorMessage(callback.error);
         }
     });
 };
