@@ -9,7 +9,7 @@ userForm.loginFormCallback = dataLogin => {
          if (callback.success){            
             location.reload();
          } else {
-             setLoginErrorMessage(message);
+            setLoginErrorMessage(message);
          }
      });
 };
@@ -18,7 +18,7 @@ userForm.loginFormCallback = dataLogin => {
 // register
 userForm.registerFormCallback = dataRegister => {
     ApiConnector.register(dataRegister, (callback) => {
-        console.log(callback)
+        console.log(callback);
         if (callback.success) {           
             location.reload();
         } else {
