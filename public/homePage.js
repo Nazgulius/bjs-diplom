@@ -1,4 +1,4 @@
-let logoutButton = new LogoutButton ();
+const logoutButton = new LogoutButton ();
 
 logoutButton.action(
     ApiConnector.logout(item => {
@@ -7,3 +7,13 @@ logoutButton.action(
         }    
     })
 ); 
+
+ApiConnector.current(calback => {
+    if (calback.success) {
+        ProfileWidget.showProfile(calback);
+    }
+});
+
+const ratesBoard = new RatesBoard();
+
+ratesBoard
