@@ -1,6 +1,5 @@
+// logout
 const logoutButton = new LogoutButton ();
-
-
 logoutButton.action = () => {
      ApiConnector.logout(item => {        
          if (item.success){
@@ -9,27 +8,15 @@ logoutButton.action = () => {
      })
 }; 
 
+// ProfileWidget
 ApiConnector.current(callback => {  
     if (callback.success) {
         ProfileWidget.showProfile(callback.data);
     }
 });
 
+// ratesBoard
 const ratesBoard = new RatesBoard();
-
-// setInterval(() => {     
-//      ratesBoard.tableBody = () => {
-//         console.log("TEST");
-//         ApiConnector.getStocks(data => {
-//             console.log(data);
-//             if (data.success) {
-//                 clearTable();
-//                 fillTable(data.date);
-//             }
-//         });    
-//     };
-// }, 1000);
-
 function func() {
     ApiConnector.getStocks(item => {
         console.log(item);
@@ -47,7 +34,7 @@ setInterval(() => {
     func();
 }, 1000 *60);
 
-
+// moneyManager
 const moneyManager = new MoneyManager ();
 
 moneyManager.addMoneyCallback = (data) => {

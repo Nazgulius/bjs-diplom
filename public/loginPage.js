@@ -14,7 +14,6 @@ userForm.loginFormCallback = dataLogin => {
      });
 };
 
-
 // register
 userForm.registerFormCallback = dataRegister => {
     ApiConnector.register(dataRegister, (callback) => {
