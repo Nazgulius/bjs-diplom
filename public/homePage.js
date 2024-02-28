@@ -19,12 +19,9 @@ ApiConnector.current(callback => {
 const ratesBoard = new RatesBoard();
 function func() {
     ApiConnector.getStocks(item => {
-        console.log(item);
-        console.log(item.date);
-        if (item.success) {
-            console.log('внутри IF');
+        if (item.success) {            
             ratesBoard.clearTable();
-            ratesBoard.fillTable(item);
+            ratesBoard.fillTable(item.data);
         }
     }); 
 }
@@ -32,19 +29,72 @@ function func() {
 func();
 setInterval(() => {     
     func();
-}, 1000 *60);
+}, 1000 * 60);
 
-// moneyManager
+// Операции с деньгами
 const moneyManager = new MoneyManager ();
 
-moneyManager.addMoneyCallback = (data) => {
-    ApiConnector.addMoney(data => { 
-        if (data ) {
-            ProfileWidget.showProfile(data);
-            setMessage(isSuccess, message);
+// пополнение
+moneyManager.addMoneyCallback = money => {
+    ApiConnector.addMoney(money, callback => { 
+        if (callback.success) {
+            ProfileWidget.showProfile(callback.data);
+            moneyManager.setMessage(callback, 'Пополнение выполнено!');
         } else {
-            setMessage(isSuccess, message);
+            moneyManager.setMessage(callback, 'Ошибка пополнения!');
         }
-    });
-    
-};
+    })
+}
+
+// конвертация валюты
+moneyManager.conversionMoneyCallback = money => {
+    ApiConnector.convertMoney(money, callback => {        
+        if (callback.success) {
+            ProfileWidget.showProfile(callback.data);
+            moneyManager.setMessage(callback, 'Конвертация валюты успешно выполнена!');
+        } else {
+            moneyManager.setMessage(callback, 'Ошибка конвертации валюты!');
+        }
+    })
+}
+
+// перевод валюты
+moneyManager.sendMoneyCallback = money => {
+    ApiConnector.transferMoney(money, callback => {        
+        if (callback.success) {
+            ProfileWidget.showProfile(callback.data);
+            moneyManager.setMessage(callback, 'Перевод выполнен успешно!');
+        } else {
+            moneyManager.setMessage(callback, 'Ошибка перевода!');
+        }
+    })
+}
+
+// Работа с избранным
+const favoritesWidget = new FavoritesWidget ();
+
+// запрос списка избранного
+ApiConnector.getFavorites(callback => {
+        if (callback.success) {
+            favoritesWidget.clearTable();  
+            favoritesWidget.fillTable(callback.data); 
+            moneyManager.updateUsersList (callback.data); 
+        }
+    }
+)
+
+// добавление пользователя
+favoritesWidget.addUserCallback = favorit => {
+    ApiConnector.addUserToFavorites(favorit, callback => {
+        console.log(favorit);
+        console.log(callback);
+        if (callback.success) {
+            favoritesWidget.clearTable();  
+            favoritesWidget.fillTable(callback.data); 
+            moneyManager.updateUsersList (callback.data); 
+            favoritesWidget.setMessage(callback, 'Добавление успешно!');
+        } else {
+            favoritesWidget.setMessage(callback, 'Ошибка добавления!');
+        }
+    })
+}
