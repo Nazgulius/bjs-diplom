@@ -6,10 +6,10 @@
       "password": "demo",
       "id": 1,
       "balance": {
-        "RUB": 1001,
+        "RUB": 1000,
         "USD": 20,
         "EUR": 20.01005530417295,
-        "NTC": 3000
+        "NTC": 3000.0829923730007
       }
     },
     {
@@ -19,7 +19,7 @@
       "id": 2,
       "netocoins": 100,
       "balance": {
-        "RUB": 21,
+        "RUB": 122,
         "USD": 0,
         "EUR": 0,
         "NTC": 100
@@ -72,6 +72,30 @@
         "EUR": 0,
         "NTC": 0
       }
+    },
+    {
+      "created_at": "2024-02-29T16:44:23.163Z",
+      "login": "oleg1@demo.ru",
+      "password": "demo",
+      "id": 7,
+      "balance": {
+        "RUB": 0,
+        "USD": 0,
+        "EUR": 0,
+        "NTC": 0
+      }
+    },
+    {
+      "created_at": "2024-02-29T16:49:13.457Z",
+      "login": "oleg2@demo.ru",
+      "password": "demo",
+      "id": 8,
+      "balance": {
+        "RUB": 0,
+        "USD": 0,
+        "EUR": 0,
+        "NTC": 0
+      }
     }
   ],
   "favorites": {
@@ -90,6 +114,10 @@
       "1": "Важный пацан",
       "3": "Дедуля",
       "4": "Галя"
+    },
+    "7": {
+      "1": "oleg",
+      "2": "oleg@demo.ru"
     }
   }
 }
