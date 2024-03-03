@@ -9,9 +9,9 @@ logoutButton.action = () => {
 }; 
 
 // ProfileWidget
-ApiConnector.current(callback => {  
-    if (callback.success) {
-        ProfileWidget.showProfile(callback.data);
+ApiConnector.current(response => {  
+    if (response.success) {
+        ProfileWidget.showProfile(response.data);
     }
 });
 
@@ -36,36 +36,36 @@ const moneyManager = new MoneyManager ();
 
 // пополнение
 moneyManager.addMoneyCallback = money => {
-    ApiConnector.addMoney(money, callback => { 
-        if (callback.success) {
-            ProfileWidget.showProfile(callback.data);
-            moneyManager.setMessage(callback, 'Пополнение выполнено!');
+    ApiConnector.addMoney(money, response => { 
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(response, 'Пополнение выполнено!');
         } else {
-            moneyManager.setMessage(callback, callback.error);
+            moneyManager.setMessage(response, response.error);
         }
     })
 }
 
 // конвертация валюты
 moneyManager.conversionMoneyCallback = money => {
-    ApiConnector.convertMoney(money, callback => {        
-        if (callback.success) {
-            ProfileWidget.showProfile(callback.data);
-            moneyManager.setMessage(callback, 'Конвертация валюты успешно выполнена!');
+    ApiConnector.convertMoney(money, response => {        
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(response, 'Конвертация валюты успешно выполнена!');
         } else {
-            moneyManager.setMessage(callback, callback.error);
+            moneyManager.setMessage(response, response.error);
         }
     })
 }
 
 // перевод валюты
 moneyManager.sendMoneyCallback = money => {
-    ApiConnector.transferMoney(money, callback => {        
-        if (callback.success) {
-            ProfileWidget.showProfile(callback.data);
-            moneyManager.setMessage(callback, 'Перевод выполнен успешно!');
+    ApiConnector.transferMoney(money, response => {        
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(response, 'Перевод выполнен успешно!');
         } else {
-            moneyManager.setMessage(callback, callback.error);
+            moneyManager.setMessage(response, response.error);
         }
     })
 }
@@ -74,39 +74,39 @@ moneyManager.sendMoneyCallback = money => {
 const favoritesWidget = new FavoritesWidget ();
 
 // запрос списка избранного
-ApiConnector.getFavorites(callback => {
-        if (callback.success) {
+ApiConnector.getFavorites(response => {
+        if (response.success) {
             favoritesWidget.clearTable();  
-            favoritesWidget.fillTable(callback.data); 
-            moneyManager.updateUsersList (callback.data); 
+            favoritesWidget.fillTable(response.data); 
+            moneyManager.updateUsersList (response.data); 
         }
     }
 )
 
 // добавление в избранное
 favoritesWidget.addUserCallback = favorit => {
-    ApiConnector.addUserToFavorites(favorit, callback => {
-        if (callback.success) {
+    ApiConnector.addUserToFavorites(favorit, response => {
+        if (response.success) {
             favoritesWidget.clearTable();  
-            favoritesWidget.fillTable(callback.data); 
-            moneyManager.updateUsersList (callback.data); 
-            favoritesWidget.setMessage(callback, 'Добавление успешно!');
+            favoritesWidget.fillTable(response.data); 
+            moneyManager.updateUsersList (response.data); 
+            favoritesWidget.setMessage(response, 'Добавление успешно!');
         } else {
-            favoritesWidget.setMessage(callback, callback.error);
+            favoritesWidget.setMessage(response, response.error);
         }
     })
 }
 
 // удаление из избранного 
 favoritesWidget.removeUserCallback = favorit => {
-  ApiConnector.removeUserFromFavorites(favorit, callback => {
-    if (callback.success) {
+  ApiConnector.removeUserFromFavorites(favorit, response => {
+    if (response.success) {
         favoritesWidget.clearTable();  
-        favoritesWidget.fillTable(callback.data); 
-        moneyManager.updateUsersList (callback.data);  
-        favoritesWidget.setMessage(callback, 'Удаление успешно!');
+        favoritesWidget.fillTable(response.data); 
+        moneyManager.updateUsersList (response.data);  
+        favoritesWidget.setMessage(response, 'Удаление успешно!');
     } else {
-        favoritesWidget.setMessage(callback, callback.error);
+        favoritesWidget.setMessage(response, response.error);
     }
   })
 }

@@ -4,22 +4,22 @@ const userForm = new UserForm ();
 
 // login
 userForm.loginFormCallback = dataLogin => {    
-    ApiConnector.login(dataLogin, (callback) => {
-         if (callback.success){            
+    ApiConnector.login(dataLogin, (response) => {
+         if (response.success){            
             location.reload();
          } else {
-            userForm.setLoginErrorMessage(callback.error);
+            userForm.setLoginErrorMessage(response.error);
          }
      });
 };
 
 // register
 userForm.registerFormCallback = dataRegister => {
-    ApiConnector.register(dataRegister, (callback) => {
-        if (callback.success) {           
+    ApiConnector.register(dataRegister, (response) => {
+        if (response.success) {           
             location.reload();
         } else {
-            userForm.setRegisterErrorMessage(callback.error);
+            userForm.setRegisterErrorMessage(response.error);
         }
     });
 };
